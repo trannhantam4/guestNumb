@@ -2,7 +2,7 @@ import { View, Text, Pressable, StyleSheet, Dimensions } from "react-native";
 import React from "react";
 const { height, width } = Dimensions.get("window");
 
-export default function ({ children }) {
+export default function Button({ children, onPress }) {
   function pressHandler() {
     console.log("pressed");
   }
@@ -13,7 +13,7 @@ export default function ({ children }) {
         style={({ pressed }) =>
           pressed ? [styles.button, styles.pressed] : styles.button
         }
-        onPress={pressHandler}
+        onPress={onPress}
         android_ripple={{ color: "#4e0329" }}
       >
         <Text
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     elevation: 8,
     overflow: "hidden",
-    width: width * 0.45,
+    width: width * 0.4,
     height: height * 0.05,
     margin: width * 0.02,
   },
