@@ -7,11 +7,15 @@ import {
   Alert,
 } from "react-native";
 import React from "react";
-import Button from "../components/Button";
+import Button from "../components/ui/Button";
 import { useState } from "react";
 const { height, width } = Dimensions.get("window");
-export default function StartScreen() {
-  const [number, setNumber] = useState("");
+import GameScreen from "./GameScreen";
+import Title from "../components/ui/Title";
+import Colors from "../constants/colors";
+import Card from "../components/ui/Card";
+export default function StartScreen({ onPickNumber }) {
+  const [number, setNumber] = useState();
 
   function numberInputHandler(number) {
     setNumber(number);
@@ -27,26 +31,42 @@ export default function StartScreen() {
       ]);
       return;
     }
+    onPickNumber(chosenNumber);
   }
   return (
-    <View style={styles.container}>
-      <TextInput
-        style={styles.numberInput}
-        maxLength={2}
-        keyboardType="number-pad"
-        autoCapitalize="none"
-        onChangeText={numberInputHandler}
-        autoCorrect={false}
-        value={number}
-      />
-      <View style={{ flexDirection: "row" }}>
-        <Button onPress={resetInput}>Reset</Button>
-        <Button onPress={confirmInputHandler}>Confirm</Button>
-      </View>
+    <View style={styles.rootContainer}>
+      <Title>Guess My Number</Title>
+      <Card>
+        <Text style={styles.instructionText}>Enter Your Number</Text>
+        <TextInput
+          style={styles.numberInput}
+          maxLength={2}
+          keyboardType="number-pad"
+          autoCapitalize="none"
+          onChangeText={numberInputHandler}
+          autoCorrect={false}
+          value={number}
+        />
+        <View style={{ flexDirection: "row" }}>
+          <Button onPress={resetInput}>Reset</Button>
+          <Button onPress={confirmInputHandler}>Confirm</Button>
+        </View>
+      </Card>
     </View>
   );
 }
 const styles = StyleSheet.create({
+  rootContainer: {
+    flex: 1,
+    marginTop: 100,
+    alignItems: "center",
+  },
+  instructionText: {
+    color: Colors.orange,
+    fontSize: height * 0.03,
+    fontWeight: "bold",
+    marginTop: 12,
+  },
   container: {
     marginTop: height * 0.1,
     backgroundColor: "#4e0329",
