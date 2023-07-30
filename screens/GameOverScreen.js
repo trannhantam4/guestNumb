@@ -2,16 +2,21 @@ import { View, Text, StyleSheet, Dimensions } from "react-native";
 import React from "react";
 import Title from "../components/ui/Title";
 import Colors from "../constants/colors";
+import Button from "../components/ui/Button";
 const { width, height } = Dimensions.get("window");
-export default function GameOverScreen() {
+export default function GameOverScreen({ roundNumber, number, onRestart }) {
   return (
     <View style={styles.screen}>
       <Title>GameOverScreen</Title>
       <View>
         <Text style={styles.text}>
-          You needed <Text style={styles.highlightText}>X</Text> rounds to guess
-          number <Text style={styles.highlightText}>Y</Text>
+          You needed <Text style={styles.highlightText}>{roundNumber}</Text>{" "}
+          rounds to guess number{" "}
+          <Text style={styles.highlightText}>{number}</Text>
         </Text>
+        <View style={{ alignSelf: "center" }}>
+          <Button onPress={onRestart}>Play Again</Button>
+        </View>
       </View>
     </View>
   );
@@ -19,7 +24,8 @@ export default function GameOverScreen() {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    padding: 24,
+    padding: width * 0.05,
+    justifyContent: "center",
   },
   text: {
     fontSize: height * 0.03,

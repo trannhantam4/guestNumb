@@ -6,11 +6,11 @@ export default function Card({ children }) {
 }
 const styles = StyleSheet.create({
   container: {
-    marginTop: height * 0.1,
+    marginTop: height * 0.03,
     backgroundColor: "#4e0329",
     alignItems: "center",
     justifyContent: "center",
-    height: height * 0.2,
+    height: height * 0.25,
     width: width * 0.9,
     alignSelf: "center",
     borderRadius: 10,
